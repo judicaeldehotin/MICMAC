@@ -57,6 +57,7 @@
 
 //then, name templates implementations
 %template(cIm2Du8) MMVII::cIm2D<tU_INT1>;
+%template(cDataIm2Du8) MMVII::cDataIm2D<tU_INT1>;
 
 namespace std {
     %template(IntVector)    vector<int>;
