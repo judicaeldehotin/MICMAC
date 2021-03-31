@@ -34,20 +34,22 @@ Dependencies:
 On debian:
     apt install swig python3-dev doxygen graphviz pkg-config
 
+Compilation:
     make -f Makefile_apipy_linux
 
+The module is automatically copied in ~/.local/lib/python3.*/site-packages/ and the xml files in ~/.local/mmv2/.
 
 Developement
 ------------
 
-To add MMv2 classes to python, add then to mmv2.i file (both #include and %include).
+To add MMv2 classes to python, add then to mmv2.i file (in "classes to export" part).
+Tu be able to use templates classes, use %template.
 If you want to be able to use python lists for objects of these classes, use %template.
-
-This way you can see every undefined references that you have to fix (by adding other files or hiding it with #ifndef SWIG).
 
 PIP package tutorial: https://packaging.python.org/tutorials/packaging-projects/
 
 
 TODO
 ----
+ - matrices with numpy
 

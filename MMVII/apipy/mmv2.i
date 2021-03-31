@@ -49,16 +49,16 @@
 
 
 //----------------------------------------------------------------------
-//templates (has to be before %include "api/api_mmv2.h")
-//used to make them usable as python lists
-//first, expose templates
+//classes to export
+%include "api/api_mmv2.h"
 %include "MMVII_Ptxd.h"
 %include "MMVII_Images.h"
 
-//then, name templates implementations
+//templates have to be named to be exported
 %template(cIm2Du8) MMVII::cIm2D<tU_INT1>;
 %template(cDataIm2Du8) MMVII::cDataIm2D<tU_INT1>;
 
+//used to make them usable as python lists
 namespace std {
     %template(IntVector)    vector<int>;
     %template(DoubleVector) vector<double>;
@@ -69,16 +69,10 @@ namespace std {
  
 
 //----------------------------------------------------------------------
-//classes to export
-
-%include "api/api_mmv2.h"
-
-
-//----------------------------------------------------------------------
 
 //check python version
 %pythoncode %{
-print("MicMac Python3 API")
+print("MicMacV2 Python3 API")
 mmv2_init();
 %}
 
