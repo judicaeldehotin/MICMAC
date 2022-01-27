@@ -169,15 +169,23 @@ HEADER=$(wildcard ${MMV2DirIncl}*.h)
 #  Binaries
 #== CFLAGS etc...
 #
-CXX=g++
-CFlags= "-fopenmp" "-std=c++17" "-Wall"  "-Werror" "-O4" "-fPIC" -I${MMV2Dir} -I${MMV2Dir}/ExternalInclude -I${MMDir}/include/ -I${MMDir} -D'MMVII_INSTALL_PATH="${MMV2_INSTALL_PATH}"'
-#CFlags= "-fopenmp" "-std=c++17" "-Wall"  "-Werror" "-O4" "-march=native" "-fPIC" -I${MMV2Dir} -I${MMV2Dir}/ExternalInclude -I${MMDir}/include/ -I${MMDir} -D'MMVII_INSTALL_PATH="${MMV2_INSTALL_PATH}"'
+CXX=${CXX}
+$(info $$CXX is [${CXX}])
 
+$(info $$BOOST_INCLUDES is [${BOOST_INCLUDES}])
+
+CFlags= "-fopenmp" "-std=c++17" "-stdlib=libc++" "-Wall" "-Werror" ${CExtraFlags} "-fPIC" -I${MMV2Dir} -I${BOOST_INCLUDES} -I${MMV2Dir}/ExternalInclude -I${MMDir}/include -I${MMDir} -D'MMVII_INSTALL_PATH="${MMV2_INSTALL_PATH}"'
+
+$(info CFlags is [${CFlags}])
 
 BOOST_LIBS=
-QTAnnLibs= -lXext /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Xml.so /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so -lGLU -lGL  -ldl -lpthread /usr/lib/x86_64-linux-gnu/libQt5Xml.so /usr/lib/x86_64-linux-gnu/libQt5Concurrent.so /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so ../../lib/libANN.a
-## MacOS : may be -lstdc++fs should be replaced by -lc++experimental
-LibsFlags= ${MMV2ElisePath} -lX11  ${BOOST_LIBS}  ${QTAnnLibs}  -lstdc++fs
+
+QTAnnLibs= -lXext -L${XEXT_ROOT}/lib ${QT5_LIBS} -lGLU -L${GLU_ROOT}/lib -ldl -lpthread ../../lib/libANN.a
+LibsFlags= ${MMV2ElisePath} -L${X11_ROOT}/lib -lX11  ${BOOST_LIBS}  ${QTAnnLibs} ${ExtraLibsFlags}
+
+$(info $LibsFlags is [${LibsFlags}])
+
+
 #
 ${MMV2DirBin}${MMV2Exe} :  ${OBJ} ${MAIN} ${MMV2ElisePath}
 	${CXX}  ${MAIN} ${CFlags}  ${OBJ}  ${LibsFlags}  -o ${MMV2DirBin}${MMV2Exe} 
