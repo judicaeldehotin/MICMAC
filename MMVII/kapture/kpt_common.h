@@ -12,13 +12,17 @@
 #include <filesystem>
 #include <stdexcept>
 
+//#include <experimental/filesystem>
+//namespace std {
+//namespace filesystem = std::experimental::filesystem;
+//}
+
+
 // #define KAPTURE_USE_EIGEN
 
 #ifdef KAPTURE_USE_EIGEN
 #include <Eigen/Geometry>
 #endif
-
-
 
 
 // FIXME CM: Faire les write
