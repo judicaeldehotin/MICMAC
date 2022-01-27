@@ -1,6 +1,9 @@
 #include "include/MMVII_all.h"
 #include <cmath>
 
+#include <chrono>
+#include <thread>
+
 using namespace NS_SymbolicDerivative ;
 /** \file BenchGlob.cpp
     \brief Main bench
@@ -900,7 +903,10 @@ int cAppli_MPDTest::Exe()
    {
        // Si on le met a 10h => reveil a 6h20
        double t = 8.0;
-       sleep(3600.0 * t);
+//       sleep(3600.0 * t);
+       std::chrono::duration<double> delay(3600.0 * t);
+       std::this_thread::sleep_for(delay);
+
        std::string aName= "/home/mpd/Bureau/Perso1/Musik/Bach/bach-goldberg-variations-bwv-988-glenn-gould-1981.mp3";
        aName = "cvlc " + aName;
        StdOut() << system(aName.c_str()) << "\n";;
