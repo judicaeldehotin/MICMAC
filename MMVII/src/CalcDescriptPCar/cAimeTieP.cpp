@@ -551,13 +551,9 @@ void cSetAimePCAR::SaveInFile(const std::string & aName) const
      }
 }
 
-
-
 /*  ====  INSTANCIATION  ======= */
 
 template class cProtoAimeTieP<tREAL4>;
 template class cProtoAimeTieP<tINT2>;
-
-
-
 };
+

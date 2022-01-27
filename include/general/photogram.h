@@ -1341,8 +1341,8 @@ class PolynomialEpipolaireCoordinate : public EpipolaireCoordinate
               Polynome2dReal  PolToYEpip();
               Polynome2dReal  PolToYInit();
 
-              virtual  const PolynomialEpipolaireCoordinate * CastToPol() const override;
-          void write(class  ELISE_fp & aFile) const;
+              virtual const PolynomialEpipolaireCoordinate * CastToPol() const override;
+              void write(class  ELISE_fp & aFile) const;
               static PolynomialEpipolaireCoordinate read(ELISE_fp & aFile);
         //     P ->  aChSacle * Pol(P/aChSacle)
               EpipolaireCoordinate * MapingChScale(REAL aChSacle) const override;
