@@ -69,17 +69,23 @@ done
 
 export ExtraLibsFlags="-L${OMP_ROOT}/lib -lc++ -headerpad_max_install_names"
 
-export CExtraFlags="\"-stdlib=libc++\" \"-Wno-inconsistent-missing-override\" \"-Wno-undefined-var-template\" \"-Wno-mismatched-tags\" \"-Wno-unused-value\" \"-Wno-delete-abstract-non-virtual-dtor\" \"-Wno-unused-function\" \"-O3\" \"-DFORSWIG\""
+export CExtraFlags="\"-stdlib=libc++\" \"-Wno-inconsistent-missing-override\" \"-Wno-undefined-var-template\" \"-Wno-mismatched-tags\" \"-Wno-unused-value\" \"-Wno-delete-abstract-non-virtual-dtor\" \"-Wno-unused-private-field\" \"-Wno-unused-function\" \"-O3\" \"-DFORSWIG\""
 
+echo =============================
 #make clean
-make -f Mk-MMVII.makefile -j4 VERBOSE=1
-#make -j4 VERBOSE=1
+#make -f Mk-MMVII.makefile -j4 VERBOSE=1
+make -j4 VERBOSE=1
 
 # rpath
-otool -L MMVII
 for QTLIB_NAME in $QTLIB_NAMES
 do
     install_name_tool -change @rpath/$QTLIB_NAME.framework/Versions/5/$QTLIB_NAME $QT5_ROOT/lib/$QTLIB_NAME.framework/Versions/5/$QTLIB_NAME ./MMVII
 done
+otool -L MMVII
 
-./MMVII  GenCodeSymDer
+# ./MMVII  GenCodeSymDer
+echo "**********************************************************************"
+echo Pass 1
+echo "**********************************************************************"
+
+ make -j4 VERBOSE=1

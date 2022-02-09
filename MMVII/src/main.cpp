@@ -20,6 +20,10 @@ using namespace MMVII;
 
 int main(int argc, char ** argv)
 {
+{
+   StdOut() << "GGGGHHH " << __LINE__ << " at " << __FILE__ << "\n";
+   return EXIT_SUCCESS;
+}
    SaveArgC = argc;
    SaveArgV = argv;
 
@@ -61,6 +65,7 @@ int main(int argc, char ** argv)
    {
        StdOut()  << aSpec->Name() << " => " << aSpec->Comment() << "\n";
    }
+StdOut() << "GGGG " << __LINE__ << " at " << __FILE__ << "\n";
    return EXIT_SUCCESS;
 }
 
