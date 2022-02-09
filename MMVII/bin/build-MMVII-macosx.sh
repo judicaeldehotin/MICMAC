@@ -67,9 +67,11 @@ do
     export QT5_LIBS="$QT5_LIBS ${QT5_ROOT}/lib/$QTLIB_NAME\.framework/$QTLIB_NAME ${QT5_ROOT}/lib/$QTLIB_NAME.framework/$QTLIB_NAME"
 done
 
-export ExtraLibsFlags="-L${OMP_ROOT}/lib -lc++ -headerpad_max_install_names"
+export isdebug="" #"-g"
 
-export CExtraFlags="\"-stdlib=libc++\" \"-Wno-inconsistent-missing-override\" \"-Wno-undefined-var-template\" \"-Wno-mismatched-tags\" \"-Wno-unused-value\" \"-Wno-delete-abstract-non-virtual-dtor\" \"-Wno-unused-private-field\" \"-Wno-unused-function\" \"-O3\" \"-DFORSWIG\""
+export ExtraLibsFlags="-L${OMP_ROOT}/lib -lc++ -headerpad_max_install_names $isdebug"
+
+export CExtraFlags="\"-stdlib=libc++\" \"-Wno-inconsistent-missing-override\" \"-Wno-undefined-var-template\" \"-Wno-mismatched-tags\" \"-Wno-unused-value\" \"-Wno-delete-abstract-non-virtual-dtor\" \"-Wno-unused-private-field\" \"-Wno-unused-function\" \"-O3\" \"$isdebug\" \"-DFORSWIG\""
 
 echo =============================
 #make clean
@@ -83,7 +85,7 @@ do
 done
 otool -L MMVII
 
-# ./MMVII  GenCodeSymDer
+./MMVII  GenCodeSymDer
 echo "**********************************************************************"
 echo Pass 1
 echo "**********************************************************************"
