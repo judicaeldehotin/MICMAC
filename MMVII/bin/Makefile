@@ -18,24 +18,27 @@ MMV2_INCLUDES=-I ${MMV2_DIR} -I ${MMV2_DIR}/ExternalInclude
 MMV2_LIBNAME=P2007
 MMV2_LIB=${MMV2_BINDIR}/lib${MMV2_LIBNAME}.a
 MMV1_LIBS=${MMV1_LIBDIR}/libelise.a ${MMV1_LIBDIR}/libANN.a
-QT_LIBS=-lXext -lGLU -lGL -lQt5Core -lQt5Gui -lQt5Xml -lQt5OpenGL -lQt5Concurrent -lQt5Widgets
+#QT_LIBS=-lXext -L${XEXT_ROOT}/lib -lGLU -L${GLU_ROOT}/lib -lGL -lQt5Core -lQt5Gui -lQt5Xml -lQt5OpenGL -lQt5Concurrent -lQt5Widgets
+QT_LIBS=-lXext -L${XEXT_ROOT}/lib -L${XEXT_ROOT}/lib -lGLU -L${GLU_ROOT}/lib ${QT5_LIBS}
 ## MacOS : may be -lstdc++fs should be replaced by -lc++experimental
-EXT_LIBS=-lpthread -lX11 ${QT_LIBS} -lstdc++fs
+#EXT_LIBS=-lpthread -lX11 -L${X11_ROOT}/lib ${QT_LIBS} -lstdc++fs
+EXT_LIBS=-lpthread -lX11 -L${X11_ROOT}/lib ${QT_LIBS} -lstdc++
 
 
 # =========== Compiler & Flags
-CXX=g++
-LD=g++
-CXXFLAGS=-fopenmp -std=c++17 -Wall  -Werror -O3 -fPIC  ${MMV2_INCLUDES} ${MMV1_INCLUDES} -D'MMVII_INSTALL_PATH="${MMV2_INSTALL_PATH}"'
-LDFLAGS=-fopenmp
+#CXX=g++
+#LD=g++
 
+
+CXXFLAGS= "-fopenmp" "-std=c++17" "-stdlib=libc++" "-Wall" "-Werror" ${CExtraFlags} "-fPIC" ${MMV2_INCLUDES} ${MMV1_INCLUDES} -I${BOOST_INCLUDES}  -D'MMVII_INSTALL_PATH="${MMV2_INSTALL_PATH}"'
+
+LDFLAGS=-fopenmp -L${OMP_ROOT}/lib -headerpad_max_install_names
 
 # ===========  Use ccache if found
 CCACHE:=${shell which ccache}
 ifneq (,${CCACHE})
-  override CXX:=${CCACHE} ${CXX}
+  CXX:=${CCACHE} ${CXX}
 endif
-
 
 # ============ Targets
 .phony: all clean distclean
