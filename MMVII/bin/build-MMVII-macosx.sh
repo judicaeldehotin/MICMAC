@@ -78,16 +78,16 @@ echo =============================
 #make -f Mk-MMVII.makefile -j4 VERBOSE=1
 make -j4 VERBOSE=1
 
-# rpath
-for QTLIB_NAME in $QTLIB_NAMES
-do
-    install_name_tool -change @rpath/$QTLIB_NAME.framework/Versions/5/$QTLIB_NAME $QT5_ROOT/lib/$QTLIB_NAME.framework/Versions/5/$QTLIB_NAME ./MMVII
-done
-otool -L MMVII
-
 ./MMVII  GenCodeSymDer
 echo "**********************************************************************"
 echo Pass 1
 echo "**********************************************************************"
 
  make -j4 VERBOSE=1
+
+# rpath
+for QTLIB_NAME in $QTLIB_NAMES
+do
+    install_name_tool -change @rpath/$QTLIB_NAME.framework/Versions/5/$QTLIB_NAME $QT5_ROOT/lib/$QTLIB_NAME.framework/Versions/5/$QTLIB_NAME ./MMVII
+done
+otool -L MMVII
