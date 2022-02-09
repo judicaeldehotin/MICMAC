@@ -169,7 +169,7 @@ HEADER=$(wildcard ${MMV2DirIncl}*.h)
 #  Binaries
 #== CFLAGS etc...
 #
-CXX=${CXX}
+
 $(info $$CXX is [${CXX}])
 
 $(info $$BOOST_INCLUDES is [${BOOST_INCLUDES}])
@@ -178,7 +178,7 @@ CFlags= "-fopenmp" "-std=c++17" "-stdlib=libc++" "-Wall" "-Werror" ${CExtraFlags
 
 $(info CFlags is [${CFlags}])
 
-BOOST_LIBS=
+#BOOST_LIBS=
 
 QTAnnLibs= -lXext -L${XEXT_ROOT}/lib ${QT5_LIBS} -lGLU -L${GLU_ROOT}/lib -ldl -lpthread ../../lib/libANN.a
 LibsFlags= ${MMV2ElisePath} -L${X11_ROOT}/lib -lX11  ${BOOST_LIBS}  ${QTAnnLibs} ${ExtraLibsFlags}

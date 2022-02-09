@@ -1,5 +1,6 @@
 #include "../include/MMVII_all.h"
 
+using namespace std;
 namespace MMVII {
 static int SaveArgC;
 static char ** SaveArgV;
@@ -22,7 +23,8 @@ int main(int argc, char ** argv)
    SaveArgC = argc;
    SaveArgV = argv;
 
-   std::setlocale(LC_ALL, "C");
+   setlocale(LC_ALL, "C");
+   //std::setlocale(LC_ALL, "C");
    // std::setlocale(LC_ALL, "en_US.UTF-8");
 
    // Debug, print command
