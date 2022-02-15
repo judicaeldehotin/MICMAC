@@ -30,6 +30,7 @@ class cSetCodeOf1Circle
       const tBinCodeTarg & CodeOfNum(int aNum) const;
       int N() const;
       int K() const;
+      double Rho0() const;
     private :
       double   mRho0;
       int      mK;

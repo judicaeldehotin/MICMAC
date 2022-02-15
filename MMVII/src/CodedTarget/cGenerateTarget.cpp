@@ -27,6 +27,7 @@ const tBinCodeTarg & cSetCodeOf1Circle::CodeOfNum(int aNum) const
 
 int cSetCodeOf1Circle::N() const {return mN;}
 int cSetCodeOf1Circle::K() const {return mK;}
+double cSetCodeOf1Circle::Rho0() const {return mRho0;}
 
 /* ****    cCodesOf1Target   ***** */
 
