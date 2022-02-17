@@ -1,4 +1,5 @@
 #include "../include/MMVII_all.h"
+#include <locale>
 
 namespace MMVII {
 static int SaveArgC;
