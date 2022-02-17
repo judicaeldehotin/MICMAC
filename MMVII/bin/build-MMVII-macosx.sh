@@ -56,7 +56,7 @@ else
     fi
 fi
 
-export BOOST_INCLUDES=$BOOST_ROOT/include/boost-1_$BOOST_VERSION
+BOOST_INCLUDES=$BOOST_ROOT/include/boost-1_$BOOST_VERSION
 
 QTLIB_NAMES="QtCore QtGui QtXml QtOpenGL QtWidgets QtConcurrent"
 
@@ -67,23 +67,23 @@ do
     export QT5_LIBS="$QT5_LIBS ${QT5_ROOT}/lib/$QTLIB_NAME\.framework/$QTLIB_NAME ${QT5_ROOT}/lib/$QTLIB_NAME.framework/$QTLIB_NAME"
 done
 
-export isdebug="" #"-g"
+isdebug="" #"-g"
 
-export ExtraLibsFlags="-L${OMP_ROOT}/lib -lc++ -headerpad_max_install_names $isdebug"
-
-export CExtraFlags="\"-stdlib=libc++\"  \"-O3\" \"$isdebug\" \"-DFORSWIG\""
+export LDEXTRAFLAGS="-L${X11_ROOT}/lib -L${OMP_ROOT}/lib -headerpad_max_install_names -$isdebug"
+export CXXEXTRAFLAGS="-stdlib=libc++ $isdebug -I${BOOST_INCLUDES}"
+QT_LIBS="-lXext -L${XEXT_ROOT}/lib -L${XEXT_ROOT}/lib -lGLU -L${GLU_ROOT}/lib ${QT5_LIBS}"
 
 echo =============================
 #make clean
 #make -f Mk-MMVII.makefile -j4 VERBOSE=1
-make -j4 VERBOSE=1
+make -j4 QT_LIBS="${QT_LIBS}"
 
 ./MMVII  GenCodeSymDer
 echo "**********************************************************************"
 echo Pass 1
 echo "**********************************************************************"
 
- make -j4 VERBOSE=1
+make -j4 QT_LIBS="${QT_LIBS}"
 
 # rpath
 for QTLIB_NAME in $QTLIB_NAMES
