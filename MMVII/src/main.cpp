@@ -1,6 +1,8 @@
 #include "../include/MMVII_all.h"
 
 using namespace std;
+#include <clocale>
+
 namespace MMVII {
 static int SaveArgC;
 static char ** SaveArgV;

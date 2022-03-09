@@ -1,5 +1,7 @@
 #include "include/MMVII_all.h"
-#include <boost/thread/thread.hpp> 
+
+#include <unistd.h>
+
 namespace MMVII
 {
 bool NeverHappens() {return false;}

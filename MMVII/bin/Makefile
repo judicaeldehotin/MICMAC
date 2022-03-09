@@ -26,17 +26,19 @@ EXT_LIBS=-lpthread -lX11 -L${X11_ROOT}/lib ${QT_LIBS} -lstdc++
 
 
 # =========== Compiler & Flags
-#CXX=g++
-#LD=g++
+# CXX=g++
+# LD=g++
+# with_openmp=-fopenmp
+  with_openmp=
 
-CXXFLAGS= "-fopenmp" "-std=c++17" "-stdlib=libc++" "-Wall" "-Werror" ${CExtraFlags} "-fPIC" ${MMV2_INCLUDES} ${MMV1_INCLUDES} -I${BOOST_INCLUDES}  -D'MMVII_INSTALL_PATH="${MMV2_INSTALL_PATH}"'
+CXXFLAGS="${with_openmp}" "-std=c++17" "-stdlib=libc++" "-Wall" "-Werror" ${CExtraFlags} "-fPIC" ${MMV2_INCLUDES} ${MMV1_INCLUDES} -I${BOOST_INCLUDES} -D'MMVII_INSTALL_PATH="${MMV2_INSTALL_PATH}"'
 
-LDFLAGS=-fopenmp -L${OMP_ROOT}/lib -headerpad_max_install_names
+LDFLAGS="${with_openmp}" -L${OMP_ROOT}/lib -headerpad_max_install_names
 
 # ===========  Use ccache if found
 CCACHE:=${shell which ccache}
 ifneq (,${CCACHE})
-  override CXX:=${CCACHE} ${CXX}
+  CXX:=${CCACHE} ${CXX}
 endif
 
 # ============ Targets

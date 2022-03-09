@@ -1,5 +1,6 @@
 #include "include/MMVII_all.h"
 #include <cmath>
+#include <unistd.h>
 
 #include <chrono>
 #include <thread>
