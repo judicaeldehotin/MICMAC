@@ -732,6 +732,16 @@ std::string cMMVII_Appli::NameFileLog(bool Finished) const
           ;
 }
 
+std::string cMMVII_Appli::NameTaskFile_prefix() const
+{
+   return
+              //mDirProject
+               mDirProjGMA
+             + TmpMMVIIDirGlob
+             + TmpMMVIIMakefileTasksDir
+          ;
+}
+
 std::string cMMVII_Appli::PrefixPCar(const std::string & aNameIm,const std::string & aPref) const
 {
    return mDirProject +TmpMMVIIDirPCar + aNameIm + "/" + aPref;
@@ -833,6 +843,9 @@ void cMMVII_Appli::InitProject()
 
    aDir += TmpMMVIIProcSubDir;
    CreateDirectories(aDir,true);
+
+   // Dir for makefile tasks
+   CreateDirectories(NameTaskFile_prefix(),true);
 
    if (! mModeHelp)
    {
@@ -1315,7 +1328,7 @@ int  cMMVII_Appli::ExeOnePackComParal(const std::list<std::string> & aLCom)
       aOfs.Ofs().close();
    }
 
-   int aResult =  GlobParalSysCallByMkF(aNameMk,aLCom,mNbProcAllowed);
+   int aResult =  GlobParalSysCallByMkF(aNameMk,aLCom,mNbProcAllowed,NameTaskFile_prefix());
    {
       cMMVII_Ofs  aOfs(aName,true);
       if (aResult == EXIT_SUCCESS)

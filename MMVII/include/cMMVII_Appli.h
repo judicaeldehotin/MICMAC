@@ -441,6 +441,8 @@ class cMMVII_Appli : public cMMVII_Ap_NameManip,
         void                                      LogCommandIn(const std::string&,bool Main);  ///< Log command begin
         void                                      LogCommandOut(const std::string&,bool Main); ///< Log command end
         std::string                               NameFileLog(bool Finished) const; ///< File 4 log each process
+        std::string                               NameTaskFile_prefix() const; ///< Prefix for makefile target
+
         static std::vector<cMMVII_Appli *>        TheStackAppli;     ///< Unique application
         static int                                TheNbCallInsideP;  ///< Number of Appli created in the same process
         static bool                               msInDstructor;  ///< Some caution must be taken once destruction has begun

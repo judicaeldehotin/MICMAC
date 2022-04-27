@@ -30,6 +30,7 @@ const std::string TmpMMVIIDirPCar        = TmpMMVIIDirPrefix + "-PCar/";
 
 const std::string MMVIITestDir       = "MMVII-TestDir/";
 const std::string TmpMMVIIProcSubDir = "Process/";
+const std::string TmpMMVIIMakefileTasksDir = "MakefileTasks/";
 
 const std::string BLANK = " ";
 // Files

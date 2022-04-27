@@ -1,4 +1,5 @@
 #include "include/MMVII_all.h"
+#include <functional>
 
 namespace MMVII
 {
@@ -15,20 +16,37 @@ int GlobSysCall(const std::string & aCom, bool SVP)
    return aResult;
 }
 
+std::string removeInternalFormCom(const std::string & aCom)
+{
+    static std::vector<std::string> internParams={GIP_LevCall, GIP_PGMA, GIP_DirProjGMA};
+    std::size_t found;
+    std::size_t pos = aCom.size();
+    for (auto &aIntParam : internParams)
+    {
+        found = aCom.find(BLANK + aIntParam + "=");
+        if (found<pos) pos=found;
+    }
+    return aCom.substr(0, pos);
+}
 
-int GlobParalSysCallByMkF(const std::string & aNameMkF,const std::list<std::string> & aListCom,int aNbProcess,bool SVP)
+int GlobParalSysCallByMkF(const std::string & aNameMkF,const std::list<std::string> & aListCom,int aNbProcess,const std::string & aTaskFilePrefix,bool SVP)
 {
    //RemoveFile(const  std::string & aFile,bool SVP)
 
    cMMVII_Ofs  aOfs(aNameMkF,false);
    int aNumTask=0;
    std::string aStrAllTask = "all : ";
+
+   std::hash<std::string> hasher;
+
    for (const auto & aNameCom : aListCom)
    {
-       std::string aNameTask = "Task_" + ToStr(aNumTask);
+       //get nameCom without internal params
+       std::size_t aComHash = hasher(removeInternalFormCom(aNameCom));
+       std::string aNameTask = aTaskFilePrefix + "Task_" + ToStr<std::size_t>(aComHash);
        aStrAllTask += BLANK  + aNameTask;
        aOfs.Ofs() << aNameTask << " :\n";
-       aOfs.Ofs() << "\t" << aNameCom << "\n";
+       aOfs.Ofs() << "\t" << aNameCom <<" && touch " << aNameTask << "\n";
        aNumTask++;
    }
    aOfs.Ofs() << aStrAllTask << "\n";

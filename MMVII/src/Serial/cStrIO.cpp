@@ -228,6 +228,12 @@ template <>  int cStrIO<int>::FromStr(const std::string & aStr)
 }
 template <>  const std::string cStrIO<int>::msNameType = "int";
 
+template <>  std::string cStrIO<std::size_t>::ToStr(const std::size_t & anI)
+{
+   sprintf(BufStrIO,"%lu",anI);
+   return BufStrIO;
+}
+
 std::string ToStr(int aVal,int aSzMin)
 {
    std::string aRes = ToStr(std::abs(aVal));
@@ -237,6 +243,7 @@ std::string ToStr(int aVal,int aSzMin)
        aRes = "-" + aRes;
    return aRes;
 }
+
 /*
 std::string  ToS_NbDigit(int aNb,int aNbDig,bool AcceptOverFlow)
 {
