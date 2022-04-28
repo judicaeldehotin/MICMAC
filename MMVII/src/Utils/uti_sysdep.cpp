@@ -16,7 +16,7 @@ int GlobSysCall(const std::string & aCom, bool SVP)
    return aResult;
 }
 
-std::string removeInternalFormCom(const std::string & aCom)
+std::string removeInternalFromCom(const std::string & aCom)
 {
     static std::vector<std::string> internParams={GIP_LevCall, GIP_PGMA, GIP_DirProjGMA};
     std::size_t found;
@@ -42,8 +42,8 @@ int GlobParalSysCallByMkF(const std::string & aNameMkF,const std::list<std::stri
    for (const auto & aNameCom : aListCom)
    {
        //get nameCom without internal params
-       std::size_t aComHash = hasher(removeInternalFormCom(aNameCom));
        std::string aNameTask = aTaskFilePrefix + "Task_" + ToStr<std::size_t>(aComHash);
+       std::size_t aComHash = hasher(removeInternalFromCom(aNameCom));
        aStrAllTask += BLANK  + aNameTask;
        aOfs.Ofs() << aNameTask << " :\n";
        aOfs.Ofs() << "\t" << aNameCom <<" && touch " << aNameTask << "\n";
