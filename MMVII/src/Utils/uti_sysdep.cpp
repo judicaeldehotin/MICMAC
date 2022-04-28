@@ -42,8 +42,8 @@ int GlobParalSysCallByMkF(const std::string & aNameMkF,const std::list<std::stri
    for (const auto & aNameCom : aListCom)
    {
        //get nameCom without internal params
-       std::string aNameTask = aTaskFilePrefix + "Task_" + ToStr<std::size_t>(aComHash);
        std::size_t aComHash = hasher(removeInternalFromCom(aNameCom));
+       std::string aNameTask = aTaskFilePrefix + "Task_" + std::to_string(aComHash);
        aStrAllTask += BLANK  + aNameTask;
        aOfs.Ofs() << aNameTask << " :\n";
        aOfs.Ofs() << "\t" << aNameCom <<" && touch " << aNameTask << "\n";

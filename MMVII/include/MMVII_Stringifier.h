@@ -59,7 +59,6 @@ template <>  std::string cStrIO<double>::ToStr(const double & anI);
 template <>  double cStrIO<double>::FromStr(const std::string & aStr);
 template <>  std::string cStrIO<std::string>::ToStr(const std::string & anI);
 template <>  std::string cStrIO<std::string>::FromStr(const std::string & aStr);
-template <>  std::string cStrIO<std::size_t>::ToStr(const std::size_t & anI);
 
 /*
 template <>  std::string cStrIO<cPt2dr>::ToStr(const cPt2dr & anI);
