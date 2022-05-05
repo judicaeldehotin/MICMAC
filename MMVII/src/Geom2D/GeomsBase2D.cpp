@@ -196,22 +196,22 @@ template <class Type> cDenseMatrix<Type> MatOfMul (const cPtxd<Type,2> & aP)
 template class cSegment2DCompiled<TYPE>;\
 template class  cAffin2D<TYPE>;
 
-INSTANTIATE_GEOM_REAL(tREAL4)
-INSTANTIATE_GEOM_REAL(tREAL8)
-INSTANTIATE_GEOM_REAL(tREAL16)
+template<> INSTANTIATE_GEOM_REAL(tREAL4)
+template<> INSTANTIATE_GEOM_REAL(tREAL8)
+template<> INSTANTIATE_GEOM_REAL(tREAL16)
 
 
 
-#define MACRO_INSTATIATE_GEOM2D(TYPE)\
+#define MACRO_INSTANTIATE_GEOM2D(TYPE)\
 template  cSim2D<TYPE> cSim2D<TYPE>::RandomSimInv(const TYPE & AmplTr,const TYPE & AmplSc,const TYPE & AmplMinSc);\
 template  cSim2D<TYPE> cSim2D<TYPE>::FromExample(const tPt & aP0In,const tPt & aP1In,const tPt & aP0Out,const tPt & aP1Out )  ;\
 template  cSimilitud3D<TYPE> cSim2D<TYPE>::Ext3D() const;\
 template  cDenseMatrix<TYPE> MatOfMul (const cPtxd<TYPE,2> & aP);
 
 
-MACRO_INSTATIATE_GEOM2D(tREAL4)
-MACRO_INSTATIATE_GEOM2D(tREAL8)
-MACRO_INSTATIATE_GEOM2D(tREAL16)
+MACRO_INSTANTIATE_GEOM2D(tREAL4)
+MACRO_INSTANTIATE_GEOM2D(tREAL8)
+MACRO_INSTANTIATE_GEOM2D(tREAL16)
 
 
 
