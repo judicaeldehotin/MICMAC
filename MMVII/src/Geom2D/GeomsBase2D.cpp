@@ -196,9 +196,9 @@ template <class Type> cDenseMatrix<Type> MatOfMul (const cPtxd<Type,2> & aP)
 template class cSegment2DCompiled<TYPE>;\
 template class  cAffin2D<TYPE>;
 
-template<> INSTANTIATE_GEOM_REAL(tREAL4)
-template<> INSTANTIATE_GEOM_REAL(tREAL8)
-template<> INSTANTIATE_GEOM_REAL(tREAL16)
+INSTANTIATE_GEOM_REAL(tREAL4)
+INSTANTIATE_GEOM_REAL(tREAL8)
+INSTANTIATE_GEOM_REAL(tREAL16)
 
 
 
